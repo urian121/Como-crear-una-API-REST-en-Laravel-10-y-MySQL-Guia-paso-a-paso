@@ -1,6 +1,6 @@
-# CRUD completo con Laravel 10, MySQL y Bootstrap 5 🚀
+# Cómo crear una API REST en Laravel 10 y MySQL: Guia aso a paso 🚀
 
-##### Este tutorial te sumerge en el poder de Laravel 10 y MySQL, explorando la implementación de CRUD (Crear, Leer, Actualizar y Eliminar). Aprende a desarrollar aplicaciones web dinámicas y escalables con las prácticas de gestión de datos más efectivas. Descubre cómo crear, leer, actualizar y eliminar registros de manera eficiente mientras dominas las mejores prácticas de desarrollo web con Laravel y MySQL. Convierte tus ideas en aplicaciones funcionales y robustas con esta guía completa.
+##### Este tutorial te sumerge en el poder de Laravel 10, la idea es Desarrollar una API REST en Laravel 10 para la gestión de empleados. La API permitirá realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) utilizando los métodos HTTP (POST, GET, PUT y DELETE) para administrar la información de los empleados en una base de datos..
 
 ##### Requisitos previos:
 
@@ -11,11 +11,11 @@
 
 ##### Crear un proyecto de Laravel
 
-    composer create-project laravel/laravel crud-laravel-10-empleados "10.*"
+    composer create-project laravel/laravel api-rest-empleados-en-laravel-10 "10.*"
 
 ##### Acceder al proyecto creado
 
-    cd crud-laravel-10-empleados
+    cd api-rest-empleados-en-laravel-10
 
 ##### Generación de clave de aplicación
 
@@ -23,11 +23,18 @@
 
 ##### Crear Base de Datos en MySQL
 
-    bd_crud_laravel_10
+    bd_api_rest_laravel_10
 
 ##### Configuración de la base de datos
 
     Abre el archivo .env y configura los detalles de tu base de datos, como el nombre de la base de datos, el nombre de usuario y la contraseña.
+
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=bd_api_rest_laravel_10
+    DB_USERNAME=root
+    DB_PASSWORD=
 
 ##### Ejecución del servidor de desarrollo
 
@@ -36,7 +43,7 @@
 
 ##### Para Crear mi Modelo, Controlador y Migraciones
 
-    php artisan make:model Empleados -mcr
+    php artisan make:model Empleado -mcr
 
 ##### Correr las migraciones
 
@@ -52,7 +59,6 @@
             $table->string('sexo')->nullable();
             $table->string('telefono')->nullable();
             $table->string('cargo')->nullable();
-            $table->string('avatar')->nullable();
             $table->timestamps();
         });
 
@@ -66,8 +72,7 @@
         'cedula',
         'sexo',
         'telefono',
-        'cargo',
-        'avatar'
+        'cargo'
     ];
 
 ##### Notas con las Migraciones
@@ -86,29 +91,6 @@
         php artisan migrate:refresh
 
 ![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/crud-laravel10-y-mysql.png)
-
-##### Usando el helper asset
-
-      El helper asset generará la URL completa a la carpeta de avatares, asegurando que las imágenes se carguen correctamente independientemente de la ruta en la que te encuentres dentro de tu aplicación Laravel.
-      <img src="{{ asset('avatars/' . $empleado->avatar) }}" alt="Avatar" width="50" height="50" />
-
-##### 🔥 Nota
-
-    Si no hay contenido en la sección 'content' de la vista que extiende app.blade.php,
-    la plantilla base incluirá la lista de empleados por defecto.
-    Si defines contenido en la sección 'content' de la vista que extiende la plantilla base,
-    ese contenido se insertará en lugar de @yield('content') en la plantilla base.
-    Si no defines ninguna sección 'content' en la vista, la lista de empleados se incluirá automáticamente.
-    La parte @if (!trim($__env->yieldContent('content'))) ... @endif verifica si la sección 'content' está vacía en la vista
-    que extiende la plantilla base. Si está vacía (es decir, no has definido ningún contenido para esa sección en tu vista),
-    entonces se incluye la lista de empleados automáticamente.
-
-
-    @if (empty(trim($__env->yieldContent('content'))))
-        @include('empleados.index')
-    @else
-        @yield('content')
-    @endif
 
 #### Importante, pasos para correr el proyecto 🚀
 
