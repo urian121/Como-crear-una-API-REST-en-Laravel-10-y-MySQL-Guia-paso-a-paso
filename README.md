@@ -1,6 +1,6 @@
-# Cómo crear una API REST en Laravel 10 y MySQL: Guia aso a paso 🚀
+# Cómo crear una API REST en Laravel 10 y MySQL: Guia paso a paso 🚀
 
-##### Este tutorial te sumerge en el poder de Laravel 10, la idea es Desarrollar una API REST en Laravel 10 para la gestión de empleados. La API permitirá realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) utilizando los métodos HTTP (POST, GET, PUT y DELETE) para administrar la información de los empleados en una base de datos..
+##### Este tutorial te sumerge en el poder de Laravel 10, la idea es Desarrollar una API REST en Laravel 10 para la gestión de empleados. La API permitirá realizar operaciones CRUD (Crear, Leer, Actualizar y Eliminar) utilizando los métodos HTTP (POST, GET, PUT y DELETE) para administrar la información de los empleados en una base de datos.
 
 ##### Requisitos previos:
 
@@ -74,6 +74,91 @@
         'telefono',
         'cargo'
     ];
+
+##### Define las rutas de nuestra API en el archivo routes/api.php
+
+    use App\Http\Controllers\EmpleadoController;
+
+    Route::get('/empleados', [EmpleadoController::class, 'index']);
+    Route::post('/empleados', [EmpleadoController::class, 'store']);
+    Route::get('/empleados/{id}', [EmpleadoController::class, 'show']);
+    Route::put('/empleados/{id}', [EmpleadoController::class, 'update']);
+    Route::delete('/empleados/{id}', [EmpleadoController::class, 'destroy']);
+
+## Lista de Endpoint API
+
+#### Método GET ✅
+
+    👉 http://127.0.0.1:8500/api/empleados
+
+    [
+        {
+            "id": 1,
+            "nombre": "Urian",
+            "edad": 35,
+            "cedula": "20004322",
+            "sexo": "Masculino",
+            "telefono": "3213872648",
+            "cargo": "Desarrollador",
+            "created_at": null,
+            "updated_at": null
+        },
+        {
+            "id": 2,
+            "nombre": "Brenda",
+            "edad": 18,
+            "cedula": "121212",
+            "sexo": "Femenino",
+            "telefono": "321999474",
+            "cargo": "Asistente",
+            "created_at": null,
+            "updated_at": null
+        }
+    ]
+
+#### Método GET ✅
+
+    👉 http://127.0.0.1:8500/api/empleados/2
+        {
+            "id": 2,
+            "nombre": "Brenda",
+            "edad": 18,
+            "cedula": "121212",
+            "sexo": "Femenino",
+            "telefono": "321999474",
+            "cargo": "Asistente",
+            "created_at": null,
+            "updated_at": null
+        }
+
+#### Método POST ✅
+
+    👉 http://127.0.0.1:8500/api/empleados
+        {
+            "nombre": "Carlos",
+            "edad": 35,
+            "cedula": "22222",
+            "sexo": "Masculino",
+            "telefono": "55555",
+            "cargo": "Desarrollador Backend"
+        }
+
+#### Método PUT ✅
+
+    👉 http://127.0.0.1:8500/api/empleados/2
+    {
+        "id":"2",
+        "nombre": "Carlos Torres",
+        "edad": 35,
+        "cedula": "22222",
+        "sexo": "Masculino",
+        "telefono": "55555",
+        "cargo": "Desarrollador Backend"
+        }
+
+#### Método DELETE ✅
+
+    👉 http://127.0.0.1:8500/api/empleados/2
 
 ##### Notas con las Migraciones
 

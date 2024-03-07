@@ -7,59 +7,66 @@ use Illuminate\Http\Request;
 
 class EmpleadoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+
     public function index()
     {
-        //
+        $empleados = Empleado::all();
+        return response()->json($empleados, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        /* 
+        $empleado = Empleado::create($request->all());
+        return response()->json($empleado, 201);
+        */
+
+        $empleado = new Empleado();
+        $empleado->nombre = $request->nombre;
+        $empleado->cedula = $request->cedula;
+        $empleado->edad = $request->edad;
+        $empleado->sexo = $request->sexo;
+        $empleado->telefono = $request->telefono;
+        $empleado->cargo = $request->cargo;
+        $empleado->save();
+        return response()->json($empleado, 201);
+        //return response()->json(['message' => 'Empleado creado correctamente','empleado' => $empleado]);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Empleado $empleado)
+
+    public function show($IdEmpleado)
     {
-        //
+        $empleado = Empleado::findOrFail($IdEmpleado);
+        return response()->json($empleado, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Empleado $empleado)
+
+    public function update(Request $request, $IdEmpleado)
     {
-        //
+        /*
+        $empleado = Empleado::findOrFail($IdEmpleado);
+        $empleado->update($request->all());
+
+        return response()->json($empleado, 200);
+        */
+
+        // Actualizar los demás campos del empleado
+        $datoEmpleado = Empleado::findOrFail($IdEmpleado);
+        $datoEmpleado->nombre = $request->nombre;
+        $datoEmpleado->cedula = $request->cedula;
+        $datoEmpleado->edad = $request->edad;
+        $datoEmpleado->sexo = $request->sexo;
+        $datoEmpleado->telefono = $request->telefono;
+        $datoEmpleado->cargo = $request->cargo;
+        $datoEmpleado->save();
+        return response()->json($datoEmpleado, 200);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Empleado $empleado)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Empleado $empleado)
+    public function destroy($IdEmpleado)
     {
-        //
+        $empleado = Empleado::findOrFail($IdEmpleado);
+        $empleado->delete();
+        return response()->json(['message' => 'Empleado eliminado correctamente'], 200);
     }
 }
