@@ -212,7 +212,9 @@
     - Deshace todas las migraciones y las ejecuta otra vez.
         php artisan migrate:refresh
 
-![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/crud-laravel10-y-mysql.png)
+##### Resultado final
+
+![](https://raw.githubusercontent.com/urian121/imagenes-proyectos-github/master/api-rest-con-laravel-10.png)
 
 #### Importante, pasos para correr el proyecto 🚀
 
