@@ -160,6 +160,43 @@
 
     👉 http://127.0.0.1:8500/api/empleados/2
 
+##### Definir los métodos o funciones para cada una de tus rutas en un controlador
+
+        public function index()
+    {
+        $empleados = Empleado::all();
+        return response()->json($empleados, 200);
+    }
+
+    public function store(Request $request)
+    {
+
+        $empleado = Empleado::create($request->all());
+        return response()->json($empleado, 201);
+    }
+
+
+    public function show($IdEmpleado)
+    {
+        $empleado = Empleado::findOrFail($IdEmpleado);
+        return response()->json($empleado, 200);
+    }
+
+
+    public function update(Request $request, $IdEmpleado)
+    {
+        $empleado = Empleado::findOrFail($IdEmpleado);
+        $empleado->update($request->all());
+        return response()->json($empleado, 200);
+    }
+
+    public function destroy($IdEmpleado)
+    {
+        $empleado = Empleado::findOrFail($IdEmpleado);
+        $empleado->delete();
+        return response()->json(['message' => 'Empleado eliminado correctamente'], 200);
+    }
+
 ##### Notas con las Migraciones
 
     - Subir la migracion.
